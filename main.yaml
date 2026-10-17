@@ -1,0 +1,33 @@
+---
+- hosts: ec2_instance
+  become: true 
+  name: Install and configure Nginx
+  tasks: 
+    - name: Install Nginx
+      ansible.builtin.yum:
+        name: nginx
+        state: latest
+      notify:
+        - Start Nginx
+
+    - name: User1 creation
+      ansible.builtin.user:
+        name: shubh
+        state: present
+
+    - name: User2 creation
+      ansible.builtin.user:
+        name: nikhil
+        state: present
+
+    - name: Deploy My custom static page
+      ansible.builtin.copy:
+        src: index.html
+        dest: /usr/share/nginx/html/index.html
+        mode: '0644'
+      
+  handlers:
+    - name: Start Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: started
