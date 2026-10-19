@@ -1,0 +1,4 @@
+users : ['shubh', 'nikhil']
+src: index.html
+dest: /usr/share/nginx/html/index.html
+package_name: nginx
