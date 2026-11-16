@@ -1,0 +1,6 @@
+---
+# handlers file for nginx-role
+- name: Start The package
+  ansible.builtin.service:
+    name: "{{ package_name }}"
+    state: started

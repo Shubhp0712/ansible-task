@@ -2,30 +2,5 @@
 - hosts: ec2_instance
   become: true 
   name: Install and configure Nginx
-  vars_files:
-    - var.yaml
-  tasks: 
-    - name: Install Package
-      ansible.builtin.yum:
-        name: "{{ package_name }}"
-        state: latest
-      notify:
-        - Start The package
-
-    - name: User creation
-      ansible.builtin.user:
-        name: "{{ item }}"
-        state: present
-      loop: "{{ users }}"
-
-    - name: Deploy My custom static page
-      ansible.builtin.copy:
-        src: "{{ src }}"
-        dest: "{{ dest }}"
-        mode: '0644'
-      
-  handlers:
-    - name: Start The package
-      ansible.builtin.service:
-        name: "{{ package_name }}"
-        state: started
+  roles:
+    - nginx-role
