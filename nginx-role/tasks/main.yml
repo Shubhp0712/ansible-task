@@ -1,0 +1,21 @@
+---
+# tasks file for nginx-role
+- name: Install Package
+  ansible.builtin.yum:
+    name: "{{ package_name }}"
+    state: latest
+    update_cache: yes
+  notify:
+    - Start The package
+
+- name: User creation
+  ansible.builtin.user:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ users }}"
+
+- name: Deploy My custom static page
+  ansible.builtin.copy:
+    src: "{{ src }}"
+    dest: "{{ dest }}"
+    mode: '0644'

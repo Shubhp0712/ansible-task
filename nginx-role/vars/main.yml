@@ -1,4 +1,6 @@
+---
+# vars file for nginx-role
 users : ['shubh', 'nikhil']
-src: index.html
+src: nginx-role/files/index.html
 dest: /usr/share/nginx/html/index.html
 package_name: nginx
